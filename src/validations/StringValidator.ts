@@ -1,8 +1,8 @@
 
 type ValidateParams = {
     length?: number;
-    minLength?: number;
-    maxLength?: number;
+    min?: number;
+    max?: number;
     prefix?: string;
     suffix?: string;
     substring?: string;
@@ -26,17 +26,17 @@ export default class StringValidator {
   }
 
   min(): boolean {
-    const { minLength } = this.params;
-      if (minLength !== undefined) {
-          return this.value.length >= minLength;
+    const { min } = this.params;
+      if (min !== undefined) {
+          return this.value.length >= min;
       }
       return true;
   }
 
   max(): boolean {
-      const { maxLength } = this.params;
-      if(maxLength !== undefined) {
-          return this.value.length <= maxLength;
+      const { max } = this.params;
+      if(max !== undefined) {
+          return this.value.length <= max;
       }
     return true;
   }
