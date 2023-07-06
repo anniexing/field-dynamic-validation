@@ -83,16 +83,16 @@ const executeSpecificValidateRule = (field:Field, dispatch:Dispatch) => {
   switch (type) {
     case FieldType.Number:{
       // Perform number validation logic
-      const isValid = new NumberValidator(Number(value)).isValidNumber();
-      if (isValid) {
+      const isValid = new NumberValidator(Number(value)).validate('isValidNumber');
+      if (!isValid) {
         errorMsg = `${label} must be a number`;
       }
     }
       break;
     case FieldType.String: {
       // Perform string validation logic
-      const isStringEmpty = new StringValidator(value).trim();
-      if (!isStringEmpty) {
+      const isStringEmpty = new StringValidator(value).validate("empty");
+      if (isStringEmpty) {
         errorMsg = "Please enter a value.";
       }
     }

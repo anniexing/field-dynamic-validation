@@ -23,5 +23,5 @@ export abstract class Validator<T> {
         this.params = params;
     }
 
-    abstract validate(): boolean;
+    abstract validate(type:string): boolean;
 }
