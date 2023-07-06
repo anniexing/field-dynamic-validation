@@ -160,6 +160,12 @@ export const ruleConfiguration = {
       ruleMessage:'${path} field must be the same as ${date}',
       validate:(value:string, params:{date:Date}) => new DateValidator(value, params).isSameAs()
     },
+    {
+      fieldType:FieldType.Date,
+      ruleType: 'between',
+      ruleMessage:'${path} field must be between {min} and {max}',
+      validate:(value:string, params:{date:Date}) => new DateValidator(value, params).isSameAs()
+    },
   ],
   [FieldType.Boolean]: [
     {
