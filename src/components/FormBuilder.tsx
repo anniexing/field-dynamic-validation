@@ -25,13 +25,20 @@ export const FormBuilder = () => {
     [key: string]: string | number | Date | boolean;
   }>({});
 
+  const resetFormBuilder = () => {
+      setCurrentKey("");
+      setCurrentLabel("");
+      setParamsValues({});
+      setRuleMessage('');
+  }
+
   /**
    * mapped Rules to the options format for select rules
    * @param type
    */
   const mappedRuleOptions = (type: string) => {
     const configRules = ruleConfiguration[type as FieldType];
-   const rules =
+    const rules =
       ruleList && ruleList[type]
         ? [...configRules, ...ruleList[type]]
         : configRules;
@@ -67,7 +74,6 @@ export const FormBuilder = () => {
     setParameters(values);
   };
 
-
   const handleAddingField = () => {
     if (fields[currentKey] !== undefined) {
       alert("Key already exists");
@@ -85,11 +91,11 @@ export const FormBuilder = () => {
 
       const configRule = [...ruleConfiguration[currentType as FieldType]];
       const rule = configRule.filter(
-        (item) => item.ruleMessage === ruleMessage || item.ruleType === 'notEmpty'
+        (item) => item.ruleMessage === ruleMessage || item.ruleType === "empty"
       );
       if (rule) {
         // @ts-ignore
-        const mappedRule:ValidationRule[] = rule.map((item) => ({
+        const mappedRule: ValidationRule[] = rule.map((item) => ({
           ...item,
           validate: item.validate.toString(),
           errorMessage: (item.ruleMessage.includes("${path}")
@@ -101,6 +107,8 @@ export const FormBuilder = () => {
         dispatch(setValidationRules({ key: currentKey, rules: mappedRule }));
       }
     }
+
+      resetFormBuilder();
   };
 
   return (
@@ -117,6 +125,7 @@ export const FormBuilder = () => {
           onChange={(type) => {
             setCurrentType(type);
             mappedRuleOptions(type);
+            resetFormBuilder();
           }}
           options={{
             Number: FieldType.Number,
@@ -158,7 +167,7 @@ export const FormBuilder = () => {
               options={ruleItems}
             />
           </Grid>
-          {parameters.map((paramItem, index) => (
+          {ruleMessage && parameters.map((paramItem, index) => (
             <Grid item xs={12} key={index}>
               <InputField
                 onChange={(value) => {

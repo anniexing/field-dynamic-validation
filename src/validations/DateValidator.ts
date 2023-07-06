@@ -1,14 +1,23 @@
-export default class DateValidator {
-  private readonly value: string;
-  private readonly params: {
-    min?: Date,
-    max?: Date,
-    date?: Date;
-  };
+import { Validator } from "./Validator";
 
-  constructor(value: string, params: { date?: Date; } = {}) {
-    this.value = value;
-    this.params = params;
+export default class DateValidator extends Validator<string> {
+  validate(type: string): boolean {
+    switch (type) {
+      case "isValidDate":
+        return this.isValidDate();
+      case "isFuture":
+        return this.isFuture();
+      case "isPast":
+        return this.isPast();
+      case "isSameAs":
+        return this.isSameAs();
+      case "isBefore":
+        return this.isBefore();
+      case "isAfter":
+        return this.isAfter();
+      default:
+        return true;
+    }
   }
 
   isValidDate(): boolean {
@@ -35,24 +44,17 @@ export default class DateValidator {
   }
 
   isAfter(): boolean {
-    const {date} = this.params;
-    if(date !== undefined) {
+    const { date } = this.params;
+    if (date !== undefined) {
       return new Date(this.value) > date;
     }
     return true;
   }
 
   isBefore(): boolean {
-    const {date} = this.params;
-    if(date !== undefined) {
+    const { date } = this.params;
+    if (date !== undefined) {
       return new Date(this.value) < date;
-    }
-    return true;
-  }
-  isBetween():boolean {
-    const {min, max} = this.params;
-    if(min !== undefined && max !== undefined) {
-      return new Date(this.value) > min && new Date(this.value) <= max;
     }
     return true;
   }

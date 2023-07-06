@@ -1,32 +1,40 @@
+import { Validator } from "./Validator.ts";
 
-type ValidateParams = {
-    length?: number;
-    min?: number;
-    max?: number;
-    prefix?: string;
-    suffix?: string;
-    substring?: string;
-    regex?: RegExp;
-}
-export default class StringValidator {
-  private readonly value: string;
-  private params: ValidateParams;
-
-  constructor(
-    value: string,
-    params: ValidateParams = {}
-  ) {
-    this.value = value;
-    this.params = params;
+export default class StringValidator extends Validator<string> {
+  validate(type: string): boolean {
+    switch (type) {
+      case "empty":
+        return !this.isEmpty();
+      case "length":
+        return this.length();
+      case "min":
+        return this.min();
+      case "max":
+        return this.max();
+      case "matches":
+        return this.matches();
+      case "email":
+        return this.email();
+      case "url":
+        return this.url();
+      case "uuid":
+        return this.uuid();
+      case "trim":
+        return this.trim();
+      case "lowercase":
+        return this.lowercase();
+      case "uppercase":
+        return this.uppercase();
+      case "contains":
+        return this.contains();
+      default:
+        return true;
+    }
   }
 
   isEmpty(): boolean {
-      if(this.value.trim() === ''){
-          return false
-      }
-      return true
-    }
-
+    return this.value.trim() === "";
+  }
   length(): boolean {
     const { length } = this.params;
     return this.value.length === length;
@@ -34,25 +42,25 @@ export default class StringValidator {
 
   min(): boolean {
     const { min } = this.params;
-      if (min !== undefined) {
-          return this.value.length >= min;
-      }
-      return true;
+    if (min !== undefined) {
+      return this.value.length >= min;
+    }
+    return true;
   }
 
   max(): boolean {
-      const { max } = this.params;
-      if(max !== undefined) {
-          return this.value.length <= max;
-      }
+    const { max } = this.params;
+    if (max !== undefined) {
+      return this.value.length <= max;
+    }
     return true;
   }
 
   matches(): boolean {
-      const {regex} = this.params;
-      if(regex !== undefined) {
-          return regex.test(this.value);
-      }
+    const { regex } = this.params;
+    if (regex !== undefined) {
+      return regex.test(this.value);
+    }
     return true;
   }
 
@@ -90,26 +98,26 @@ export default class StringValidator {
   }
 
   startsWith(): boolean {
-      const {prefix} = this.params;
-      if(prefix !== undefined) {
-          return this.value.startsWith(prefix);
-      }
+    const { prefix } = this.params;
+    if (prefix !== undefined) {
+      return this.value.startsWith(prefix);
+    }
     return true;
   }
 
   endsWith(): boolean {
-      const {suffix} = this.params;
-      if(suffix !== undefined) {
-          return this.value.endsWith(suffix);
-      }
+    const { suffix } = this.params;
+    if (suffix !== undefined) {
+      return this.value.endsWith(suffix);
+    }
     return true;
   }
 
   contains(): boolean {
-      const {substring} = this.params;
-      if(substring !== undefined) {
-          return this.value.includes(substring);
-      }
+    const { substring } = this.params;
+    if (substring !== undefined) {
+      return this.value.includes(substring);
+    }
     return true;
   }
 }
