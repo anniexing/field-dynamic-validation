@@ -20,6 +20,13 @@ export default class StringValidator {
     this.params = params;
   }
 
+  isEmpty(): boolean {
+      if(this.value.trim() === ''){
+          return false
+      }
+      return true
+    }
+
   length(): boolean {
     const { length } = this.params;
     return this.value.length === length;

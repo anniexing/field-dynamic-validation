@@ -91,8 +91,8 @@ const executeSpecificValidateRule = (field:Field, dispatch:Dispatch) => {
       break;
     case FieldType.String: {
       // Perform string validation logic
-      const isStringEmpty = new StringValidator(value).trim();
-      if (!isStringEmpty) {
+      const isNoStringEmpty = new StringValidator(value).isEmpty();
+      if (!isNoStringEmpty) {
         errorMsg = "Please enter a value.";
       }
     }

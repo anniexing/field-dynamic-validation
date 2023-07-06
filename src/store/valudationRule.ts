@@ -17,6 +17,13 @@ export const ruleConfiguration = {
   [FieldType.String]: [
     {
       fieldType:FieldType.String,
+      ruleType: "notEmpty",
+      ruleMessage: "${path} must not be empty",
+      validate: (value: string, params: { length: number }) =>
+          new StringValidator(value, params).isEmpty(),
+    },
+    {
+      fieldType:FieldType.String,
       ruleType: "length",
       ruleMessage: "${path} must be exactly ${length} characters",
       validate: (value: string, params: { length: number }) =>
