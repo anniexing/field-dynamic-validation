@@ -25,6 +25,13 @@ export const FormBuilder = () => {
     [key: string]: string | number | Date | boolean;
   }>({});
 
+  const resetFormBuilder = () => {
+      setCurrentKey("");
+      setCurrentLabel("");
+      setParamsValues({});
+      setRuleMessage('');
+  }
+
   /**
    * mapped Rules to the options format for select rules
    * @param type
@@ -100,6 +107,8 @@ export const FormBuilder = () => {
         dispatch(setValidationRules({ key: currentKey, rules: mappedRule }));
       }
     }
+
+      resetFormBuilder();
   };
 
   return (
@@ -116,10 +125,7 @@ export const FormBuilder = () => {
           onChange={(type) => {
             setCurrentType(type);
             mappedRuleOptions(type);
-              setCurrentKey("");
-              setCurrentLabel("");
-              setParamsValues({});
-              setRuleMessage('')
+            resetFormBuilder();
           }}
           options={{
             Number: FieldType.Number,

@@ -4,7 +4,7 @@ export default class StringValidator extends Validator<string> {
   validate(type: string): boolean {
     switch (type) {
       case "empty":
-        return this.isEmpty();
+        return !this.isEmpty();
       case "length":
         return this.length();
       case "min":
