@@ -1,42 +1,27 @@
+import { Validator } from "./Validator.ts";
 
-type ValidateParams = {
-    length?: number;
-    minLength?: number;
-    maxLength?: number;
-    prefix?: string;
-    suffix?: string;
-    substring?: string;
-    regex?: RegExp;
+export default class StringValidator extends Validator<string>{
+validate(): boolean {
+    return false;
 }
-export default class StringValidator {
-  private readonly value: string;
-  private params: ValidateParams;
 
-  constructor(
-    value: string,
-    params: ValidateParams = {}
-  ) {
-    this.value = value;
-    this.params = params;
-  }
-
-  length(): boolean {
+    length(): boolean {
     const { length } = this.params;
     return this.value.length === length;
   }
 
   min(): boolean {
-    const { minLength } = this.params;
-      if (minLength !== undefined) {
-          return this.value.length >= minLength;
+    const { min } = this.params;
+      if (min !== undefined) {
+          return this.value.length >= min;
       }
       return true;
   }
 
   max(): boolean {
-      const { maxLength } = this.params;
-      if(maxLength !== undefined) {
-          return this.value.length <= maxLength;
+      const { max } = this.params;
+      if(max !== undefined) {
+          return this.value.length <= max;
       }
     return true;
   }
