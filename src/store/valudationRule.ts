@@ -17,6 +17,13 @@ export const ruleConfiguration = {
   [FieldType.String]: [
     {
       fieldType:FieldType.String,
+      ruleType: "notEmpty",
+      ruleMessage: "${path} must not be empty",
+      validate: (value: string, params: { length: number }) =>
+          new StringValidator(value, params).isEmpty(),
+    },
+    {
+      fieldType:FieldType.String,
       ruleType: "length",
       ruleMessage: "${path} must be exactly ${length} characters",
       validate: (value: string, params: { length: number }) =>
@@ -151,6 +158,12 @@ export const ruleConfiguration = {
       fieldType:FieldType.Date,
       ruleType: 'sameAs',
       ruleMessage:'${path} field must be the same as ${date}',
+      validate:(value:string, params:{date:Date}) => new DateValidator(value, params).isSameAs()
+    },
+    {
+      fieldType:FieldType.Date,
+      ruleType: 'between',
+      ruleMessage:'${path} field must be between {min} and {max}',
       validate:(value:string, params:{date:Date}) => new DateValidator(value, params).isSameAs()
     },
   ],

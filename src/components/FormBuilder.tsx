@@ -85,7 +85,7 @@ export const FormBuilder = () => {
 
       const configRule = [...ruleConfiguration[currentType as FieldType]];
       const rule = configRule.filter(
-        (item) => item.ruleMessage === ruleMessage
+        (item) => item.ruleMessage === ruleMessage || item.ruleType === 'notEmpty'
       );
       if (rule) {
         // @ts-ignore

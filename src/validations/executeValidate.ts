@@ -38,8 +38,6 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = numberValidateFunction(NumberValidator)(value, paramsValues, type);
           }
         }
-
-
       }
 
         break;
@@ -50,8 +48,6 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = dateValidateFunction(DateValidator)(value, paramsValues);
           }
         }
-
-
       }
 
         break;
@@ -62,9 +58,7 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = booleanValidateFunction(BooleanValidator)(value, paramsValues);
           }
         }
-
       }
-
         break;
       default:
         break;
@@ -97,8 +91,8 @@ const executeSpecificValidateRule = (field:Field, dispatch:Dispatch) => {
       break;
     case FieldType.String: {
       // Perform string validation logic
-      const isStringEmpty = new StringValidator(value).trim();
-      if (!isStringEmpty) {
+      const isNoStringEmpty = new StringValidator(value).isEmpty();
+      if (!isNoStringEmpty) {
         errorMsg = "Please enter a value.";
       }
     }

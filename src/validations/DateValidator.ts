@@ -1,6 +1,8 @@
 export default class DateValidator {
   private readonly value: string;
   private readonly params: {
+    min?: Date,
+    max?: Date,
     date?: Date;
   };
 
@@ -44,6 +46,13 @@ export default class DateValidator {
     const {date} = this.params;
     if(date !== undefined) {
       return new Date(this.value) < date;
+    }
+    return true;
+  }
+  isBetween():boolean {
+    const {min, max} = this.params;
+    if(min !== undefined && max !== undefined) {
+      return new Date(this.value) > min && new Date(this.value) <= max;
     }
     return true;
   }
