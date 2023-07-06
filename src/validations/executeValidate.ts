@@ -38,8 +38,6 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = numberValidateFunction(NumberValidator)(value, paramsValues, type);
           }
         }
-
-
       }
 
         break;
@@ -50,8 +48,6 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = dateValidateFunction(DateValidator)(value, paramsValues);
           }
         }
-
-
       }
 
         break;
@@ -62,9 +58,7 @@ const executeDynamicValidateRules = (validates: ValidationRule[], field:Field, d
             returnValue = booleanValidateFunction(BooleanValidator)(value, paramsValues);
           }
         }
-
       }
-
         break;
       default:
         break;

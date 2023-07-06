@@ -24,3 +24,6 @@ This application allows you to configure dynamic field validation rules, offerin
 ### Improvements
 - Create a Validator abstract class to define a validate method as an abstract method. The validate method will be implemented in each derived class (e.g., StringValidator, DateValidator, NumberValidator, BooleanValidator etc.), providing the specific validation logic for each type.
 - Now the system validate single field. We can think about that validate multiple fields. In the validate method, we can get the form and validate every filed in the form.
+
+### Issues
+- Can not edit validation rule for the field.
