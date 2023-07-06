@@ -1,38 +1,26 @@
 # Frontend Developer Homework Assignment
 
-## Objective:
+### Overview
+This application allows you to configure dynamic field validation rules, offering flexibility and customization for your form validation needs. You can set both specific validation rules and enable dynamic validation settings to enhance your form validation capabilities.
 
-You will be working with an existing form builder. The builder provides a possibility to choose one of several field types, set a key, a label, and add it into a form. Your task is divided into two main parts.
+## Features
 
-## Task Details:
+- Dynamic Validation Setting: Enable the dynamic validation setting through a checkbox on the page. If it is unchecked, the validation will be a specific validation.
+- Default Rule Configuration: Validation rules are pre-defined and grouped by field types.
+- Rule Object Structure: Each rule object includes properties such as rule type, rule message, and validate method.
+- Rule Builder: Configure field type, input rule type and rule message.
+- Rule Message Format: The rule message follows a specific format like "{path}...{params1}...{params2}" to allow for dynamic parameter values.
+- Form Builder: Configure field types, input keys, and labels using an intuitive Form Builder interface.
+- Select Rule Type: When dynamic validation is enabled, select a rule type for each field.
+- Params Field: Input values for the parameters through dynamically generated params fields.
+- Add Field: Create a field on the Form View by clicking the "Add Field" button.
+- OnBlur Event: The validation executes automatically when a value is entered into the field.
+- Included Validation Classes: StringValidation, NumberValidation, DateValidation, and BooleanValidation classes with corresponding validate methods.
 
-### 1. Field Input Validation:
+### Design Principles and Considerations:
+- Adhered to the Open-Closed Principle (OCP) throughout the application's design. it allows for easy integration of new features in current systems.
+- The code in the system is responsible for a specific aspect or concern. it followed the principle of Separation of Concerns (SoC). To improve the code modified independently, enhancing flexibility and scalability.
 
-In the existing application, we need to add validation to each input field according to its assigned type. For instance, if a field's type is ParamType.Number, the system should not allow the input of any non-numeric characters or symbols. Conversely, if the type is ParamType.String, any character input should be acceptable.
-
-If a user attempts to input data that does not conform to the field's type, your solution should trigger an error function that displays an appropriate message. Validation should be triggered upon the blur event on each field.
-
-### 2. Dynamic Validation Setting:
-
-In addition to basic field type validation, we need a feature that allows additional, user-defined validation rules to be set directly through the interface. This functionality should allow for rules such as:
-
-- The entered value must be greater than or equal to 5.
-- The input must begin with a capital letter.
-- The input must match a specific pattern (e.g., an email format).
-- The input must not contain any special characters.
-- The input must be a valid date. 
-
-The interface should allow for the definition of these and other validation rules, without requiring modifications to the codebase for each new rule. The specifics of how you enable this dynamic rule-setting are up to you, but we're looking for an innovative, flexible, and scalable solution.
-
-## Submission:
-
-Submit your solution by pushing your code to a public GitHub repository. Ensure your code is clean, well-commented, and adheres to our current project structure. Also, include a README file that explains your thought process and the design of your solution.
-
-## Evaluation Criteria:
-
-- The code must be clean, efficient and well-commented.
-- The solution should successfully implement the features described above.
-- The design should be scalable and maintainable, allowing for the possibility of adding more validation types in the future.
-- The README file should provide clear insight into your thought process and the rationale behind your design decisions.
-
-Good luck!
+### Improvements
+- Create a Validator abstract class to define a validate method as an abstract method. The validate method will be implemented in each derived class (e.g., StringValidator, DateValidator, NumberValidator, BooleanValidator etc.), providing the specific validation logic for each type.
+- Now the system validate single field. We can think about that validate multiple fields. In the validate method, we can get the form and validate every filed in the form.
