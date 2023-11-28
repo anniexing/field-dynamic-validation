@@ -1,5 +1,3 @@
-# Frontend Developer Homework Assignment
-
 ### Overview
 This application allows you to configure dynamic field validation rules, offering flexibility and customization for your form validation needs. You can set both specific validation rules and enable dynamic validation settings to enhance your form validation capabilities.
 
